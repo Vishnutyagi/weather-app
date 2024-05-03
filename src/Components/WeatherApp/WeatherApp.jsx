@@ -11,18 +11,18 @@ import humidity_icon from '../Assets/humidity.png'
 
 
 const WeatherApp = () => {
-   
-    let api_key="330e444f0429928f3558171737300df3";
 
-    const [wicon,setWicon] = useState(cloud_icon);
+    let api_key = "330e444f0429928f3558171737300df3";
 
-    const search = async()=>{
-        const element=document.getElementsByClassName("cityInput")
-        if(element[0].value===""){
+    const [wicon, setWicon] = useState(cloud_icon);
+
+    const search = async () => {
+        const element = document.getElementsByClassName("cityInput")
+        if (element[0].value === "") {
             return 0;
         }
-        let url=`https://api.openweathermap.org/data/2.5/weather?q=${element[0].value}&units=Metric&appid=${api_key}`;
-        
+        let url = `https://api.openweathermap.org/data/2.5/weather?q=${element[0].value}&units=Metric&appid=${api_key}`;
+
         let response = await fetch(url);
         let data = await response.json();
         const humidity = document.getElementsByClassName("humidity-percent");
@@ -30,34 +30,34 @@ const WeatherApp = () => {
         const temperature = document.getElementsByClassName("weather-temp");
         const location = document.getElementsByClassName("weather-location");
 
-        humidity[0].innerHTML  = data.main.humidity+' %';
-        wind[0].innerHTML = data.wind.speed+" Km/h";
-        temperature[0].innerHTML = data.main.temp+"°C"
+        humidity[0].innerHTML = data.main.humidity + ' %';
+        wind[0].innerHTML = Math.floor(data.wind.speed) + " Km/h";
+        temperature[0].innerHTML = Math.floor(data.main.temp) + "°C"
         location[0].innerHTML = data.name;
-        
-        if(data.weather[0].icon==="01d" || data.weather[0].icon === "01n"){
+
+        if (data.weather[0].icon === "01d" || data.weather[0].icon === "01n") {
             setWicon(clear_icon);
         }
-        else if (data.weather[0].icon==="02d" || data.weather[0].icon === "02n"){
+        else if (data.weather[0].icon === "02d" || data.weather[0].icon === "02n") {
             setWicon(cloud_icon);
         }
-        else if (data.weather[0].icon==="03d" || data.weather[0].icon === "03n"){
+        else if (data.weather[0].icon === "03d" || data.weather[0].icon === "03n") {
             setWicon(drizzle_icon);
         }
-        else if (data.weather[0].icon==="04d" || data.weather[0].icon === "04n"){
+        else if (data.weather[0].icon === "04d" || data.weather[0].icon === "04n") {
             setWicon(drizzle_icon);
         }
-        else if (data.weather[0].icon==="09d" || data.weather[0].icon === "09n"){
+        else if (data.weather[0].icon === "09d" || data.weather[0].icon === "09n") {
             setWicon(rain_icon);
         }
-        else if (data.weather[0].icon==="10d" || data.weather[0].icon === "1n"){
+        else if (data.weather[0].icon === "10d" || data.weather[0].icon === "1n") {
             setWicon(cloud_icon);
         }
-        else if (data.weather[0].icon==="13d" || data.weather[0].icon === "13n"){
+        else if (data.weather[0].icon === "13d" || data.weather[0].icon === "13n") {
             setWicon(snow_icon);
         }
-        else{
-            setWicon(clear_icon); 
+        else {
+            setWicon(clear_icon);
         }
 
 
@@ -65,37 +65,51 @@ const WeatherApp = () => {
 
 
 
-  return (
-    <div className='container'>
-      <div className='top-bar'>
-          <input type='text' className='cityInput' placeholder='Search'/>        
-           <div className='search-icon' onClick={()=>{search()}} >
-                 <img src={search_icon} alt="" />
-           </div>
-           <div className='weather-image'>
-             <img src={wicon} alt="" />
-           </div>
-           <div className='weather-temp'> 24*c</div>
-           <div className='weather-location'>London</div>
-           <div className='data-container'>
-            <div className='element'>
-                <img  src={humidity_icon} alt="" className='icon'/>
-                <div className='data'>
-                    <div className='humidity-percent'>64%</div>
-                     <div className='text'>Humidity</div>   
+    return (
+        <div className='main-container'>
+            <div className='container-1'>
+                <div className='heading'>
+                    <p className='title'>Weather Forecast</p>
+                </div>
+                <div className='search-box'>
+                    <input type='text' className='cityInput' placeholder='Enter city name' />
+                    <div className='search-icon' onClick={() => { search() }} >
+                        <img src={search_icon} alt="" />
+                    </div>
                 </div>
             </div>
-            <div className='element'>
-                <img  src={wind_icon} alt="" className='icon'/>
-                <div className='data'>
-                    <div className='wind-rate'>64%</div>
-                     <div className='text'>Wind Speed</div>   
+
+            <div className='container-2'>
+                <div className='weather-image'>
+                    <img src={wicon} alt="" />
+                </div>
+                <div className='data-container-1'>
+                    <div className='weather-location'>
+                        London
+                    </div>
+                    <div className='weather-temp'>
+                        24°C
+                    </div>
+                </div>
+                <div className='data-container-2'>
+                    <div className='element'>
+                        <img src={humidity_icon} alt="" className='icon' />
+                        <div className='data'>
+                            <div className='humidity-percent'>64%</div>
+                            <div className='text'>Humidity</div>
+                        </div>
+                    </div>
+                    <div className='element'>
+                        <img src={wind_icon} alt="" className='icon' />
+                        <div className='data'>
+                            <div className='wind-rate'>10 Km/h</div>
+                            <div className='text'>Wind Speed</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-           </div>
-      </div>
-    </div>
-  )
+        </div >
+    )
 }
 
 export default WeatherApp
