@@ -7,11 +7,11 @@
 }
 
 .container-1{
-    width: 50%;
-    height: 100vh;
+    width: 44%;
+    height: 90%;
     background-color: white;
     position: relative;
-    margin: 50px;
+    margin: 2%;
     border: 5px solid  black;
     border-right: 0px;
     margin-right: 0px;
@@ -24,7 +24,6 @@
     width: 100%;
     height: 50%;
     padding: 3%;
-    /* background-color: aqua; */
     position: relative;
 }
 
@@ -42,7 +41,7 @@
     width: 100%;
     height: 40%;
     padding: 3%;
-    /* background-color: bisque; */
+    color : white;
     display: flex;
 }
 
@@ -73,12 +72,12 @@
 }
 
 .container-2{
-    width: 50%;
-    height: 100vh;
+    width: 44%;
+    height: 90%;
     background-image: white;
     border: 5px solid black;
     border-left: 0px;
-    margin: 50px;
+    margin: 2%;
     margin-left: 0px;
     border-radius: 20px;
     border-top-left-radius: 0px;
@@ -124,9 +123,7 @@
 
 .element{
     width: calc(80% / 2);
-    /* border: 1px solid black; */
     box-sizing: border-box;
-    /* background-color: wheat; */
 }
 
 .icon{
